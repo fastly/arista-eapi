@@ -1,14 +1,15 @@
 module Arista
   module EAPI
     class Switch
-      attr_accessor :hostname, :user, :password, :protocol, :url, :attributes
+      attr_accessor :hostname, :user, :password, :protocol, :url, :attributes, :verify_ssl
 
-      def initialize(hostname, user, password, protocol = 'https')
+      def initialize(hostname, user, password, protocol = 'https', verify_ssl = true)
         self.attributes = {}
         self.hostname = hostname
         self.user = user
         self.password = password
         self.protocol = protocol
+        self.verify_ssl = verify_ssl
 
         userpass = [ CGI.escape(user), CGI.escape(password) ].join(':')
         self.url = "#{protocol}://#{userpass}@#{hostname}/command-api"
